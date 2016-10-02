@@ -1,0 +1,28 @@
+{
+  "name": "thirsty",
+  "version": "1.0.0",
+  "description": "an app that notifies plant owners when it's time to water their plant",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/audibleblink/thirsty.git"
+  },
+  "keywords": [
+    "raspberrypi",
+    "johnnyfive"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/audibleblink/thirsty/issues"
+  },
+  "homepage": "https://github.com/audibleblink/thirsty#readme",
+  "dependencies": {
+    "johnny-five": "^0.10.1",
+    "raspi-io": "^6.1.0"
+  }
+}
