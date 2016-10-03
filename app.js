@@ -26,9 +26,10 @@ board.on('ready', function() {
   // See http://wiringpi.com/pins/  and
   // https://github.com/nebrius/raspi-io
   // to see why pin 7
-  var sensor = new five.Sensor(7)
+  var sensor = new five.Sensor({ pin: 7, threshold: 2 })
 
-  sensor.on('change', function(value) {
+  sensor.scaleTo(0,100).on('change', function(value) {
+
     if (value > threshold) {
       userNotified = false
     } else {
