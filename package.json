@@ -23,6 +23,7 @@
   "homepage": "https://github.com/audibleblink/thirsty#readme",
   "dependencies": {
     "johnny-five": "^0.10.1",
-    "raspi-io": "^6.1.0"
+    "raspi-io": "^6.1.0",
+    "twitter": "^1.4.0"
   }
 }
