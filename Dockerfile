@@ -1,4 +1,4 @@
-FROM node:latest
+FROM resin/raspberrypi-node:latest
 MAINTAINER audibleblink & cen10
 
 RUN apt-get update && \
