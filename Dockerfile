@@ -11,4 +11,4 @@ RUN apt-get update && \
 ADD app.js app.js
 ADD package.json package.json
 RUN npm install
-ENTRYPOINT npm start
+ENTRYPOINT ["npm", "start"]

@@ -1,5 +1,7 @@
-// psuedocode for triggering a tweet when the plant needs water
+#!/usr/bin/node
 
+// psuedocode for triggering a tweet when the plant needs water
+//
 var five = johnny five library
 var rpi  = raspi-io library
 var twitter = twitter api
