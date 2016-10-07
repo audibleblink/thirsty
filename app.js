@@ -13,33 +13,30 @@ var client  = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-// signal threshold that says 'this plant needs water'
-var threshold = process.env.THRESHOLD
-
 // whether a user has been notified that a plant needs water
 var userNotified = false
 
 board.on('ready', function() {
 
   // Create a new generic sensor instance for
-  // a sensor connected to an analog (ADC) pin
+  // a sensor connected to an digital pin
   // See http://wiringpi.com/pins/  and
   // https://github.com/nebrius/raspi-io
-  // to see why pin 7
-  var sensor = new five.Sensor({ pin: 1 })
+  // to see why pin 1
+  var sensor = new five.Sensor.Digital(1)
 
-  sensor.scaleTo(0,100).on('change', function(value) {
-
-    if (value > threshold) {
-      userNotified = false
-    } else {
-      if (!userNotified) {
-        var tweetObj = { status: 'PLANT DEATH IMMINENT!' }
-        client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
-          if (!error) console.log(tweet) 
-        })
-      }
-    }
+  sensor.on('change', function(value) {
+    console.log("sensor value is ", value)
+    // if (value == 0) {
+    //   userNotified = false
+    // } else {
+    //   if (!userNotified) {
+    //     var tweetObj = { status: 'PLANT DEATH IMMINENT!' }
+    //     client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
+    //       if (!error) console.log(tweet) 
+    //     })
+    //   }
+    // }
   })
 })
 
