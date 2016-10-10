@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-// psuedocode for triggering a tweet when the plant needs water
+// triggering a tweet when the plant needs water
 //
 var five    = require('johnny-five')
 var Raspi   = require('raspi-io')
@@ -18,25 +18,22 @@ var userNotified = false
 
 board.on('ready', function() {
 
-  // Create a new generic sensor instance for
-  // a sensor connected to an digital pin
-  // See http://wiringpi.com/pins/  and
-  // https://github.com/nebrius/raspi-io
-  // to see why pin 1
+  // Create a new generic sensor instance for a sensor connected to an digital pin
+  // See http://wiringpi.com/pins/  and https://github.com/nebrius/raspi-io
   var sensor = new five.Sensor.Digital(1)
 
   sensor.on('change', function(value) {
-    console.log("sensor value is ", value)
-    // if (value == 0) {
-    //   userNotified = false
-    // } else {
-    //   if (!userNotified) {
-    //     var tweetObj = { status: 'PLANT DEATH IMMINENT!' }
-    //     client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
-    //       if (!error) console.log(tweet) 
-    //     })
-    //   }
-    // }
+    // console.log("sensor value is ", value)
+    if (value == 0) {
+      userNotified = false
+    } else {
+      if (!userNotified) {
+        var tweetObj = { status: 'PLANT DEATH IMMINENT! @4lex @cen10' }
+        client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
+          if (!error) console.log(tweet) 
+        })
+      }
+    }
   })
 })
 
