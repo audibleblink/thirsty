@@ -13,26 +13,22 @@ var client  = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-// whether a user has been notified that a plant needs water
-var userNotified = false
-
 board.on('ready', function() {
-
   // Create a new generic sensor instance for a sensor connected to an digital pin
   // See http://wiringpi.com/pins/  and https://github.com/nebrius/raspi-io
   var sensor = new five.Sensor.Digital(1)
 
   sensor.on('change', function(value) {
-    // console.log("sensor value is ", value)
-    if (value == 0) {
-      userNotified = false
-    } else {
-      if (!userNotified) {
-        var tweetObj = { status: 'PLANT DEATH IMMINENT! @4lex @cen10' }
-        client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
-          if (!error) console.log(tweet) 
-        })
-      }
+    console.log("INFO: sensor value is now: ", value)
+    if (value) {
+      var tweetObj = { status: 'PLANT DEATH IMMINENT! @4lex @cen10' }
+      client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
+        if (error) {
+          console.error("ERROR: " + error)
+        } else {
+          console.log("INFO: tweet sent") 
+        }
+      })
     }
   })
 })
