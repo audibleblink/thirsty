@@ -21,7 +21,7 @@ board.on('ready', function() {
   sensor.on('change', function(value) {
     console.log("INFO: sensor value is now: ", value)
     if (value) {
-      var tweetObj = { status: 'PLANT DEATH IMMINENT! @4lex @cen10' }
+      var tweetObj = { status: 'PLANT DEATH IMMINENT!' }
       client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
         if (error) {
           console.error("ERROR: " + JSON.stringify(error))
