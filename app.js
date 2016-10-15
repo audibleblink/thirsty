@@ -24,7 +24,7 @@ board.on('ready', function() {
       var tweetObj = { status: 'PLANT DEATH IMMINENT! @4lex @cen10' }
       client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
         if (error) {
-          console.error("ERROR: " + error)
+          console.error("ERROR: " + JSON.stringify(error))
         } else {
           console.log("INFO: tweet sent") 
         }
