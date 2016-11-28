@@ -2,31 +2,31 @@
 
 // triggering a tweet when the plant needs water
 //
-var five    = require('johnny-five')
-var Raspi   = require('raspi-io')
-var board   = new five.Board({ io: new Raspi() })
-var Twitter = require('twitter')
-var client  = new Twitter({
+const five = require('johnny-five')
+const Raspi = require('raspi-io')
+const Twitter = require('twitter')
+const board = new five.Board({ io: new Raspi() })
+const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
   access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-board.on('ready', function() {
+board.on('ready', () => {
   // Create a new generic sensor instance for a sensor connected to an digital pin
   // See http://wiringpi.com/pins/  and https://github.com/nebrius/raspi-io
-  var sensor = new five.Sensor.Digital(1)
+  const sensor = new five.Sensor.Digital(1)
 
-  sensor.on('change', function(value) {
-    console.log("INFO: sensor value is now: ", value)
+  sensor.on('change', (value) => {
+    console.log('INFO: sensor value is now: ', value)
     if (value) {
-      var tweetObj = { status: 'PLANT DEATH IMMINENT!' }
-      client.post('statuses/update', tweetObj, function(error, tweetObj, response) {
+      const tweetObj = { status: 'PLANT DEATH IMMINENT!' }
+      client.post('statuses/update', tweetObj, (error, tweetObj, response) => {
         if (error) {
-          console.error("ERROR: " + JSON.stringify(error))
+          console.error('ERROR: ' + JSON.stringify(error))
         } else {
-          console.log("INFO: tweet sent") 
+          console.log('INFO: tweet sent')
         }
       })
     }
